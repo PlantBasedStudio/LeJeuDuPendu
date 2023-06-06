@@ -1,0 +1,46 @@
+body{
+    background-color: cadetblue;
+}
+
+header{
+    
+    text-align: center;
+    color: white;
+    height: 20dvh;
+    justify-content: center;
+}
+
+.grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.left{
+    grid-column: 0;
+}
+
+.right{
+    grid-column: 2;
+}
+
+main{
+    text-align: center;
+}
+
+footer{
+    display: flex;
+    width: 90dvw;
+    max-width: 90dvw;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    bottom: 0;
+    gap: 1px;
+}
+
+.key{
+    padding: 1.4em 5em;
+    display: flex;
+    width: 8dvw;
+    
+}
