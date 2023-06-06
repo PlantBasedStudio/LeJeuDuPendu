@@ -18,6 +18,16 @@ function startGame() {
     theWord = WordsToFind[Math.floor(Math.random() * WordsToFind.length)];
     console.log(theWord);
     gameStarted = true;
+    fractionTheWord();
+}
+
+// Function fractionner le mot en valeurs pour pouvoir les show + show le mot dans le HTML
+function fractionTheWord(){
+    elementWordToFind.textContent = "";
+    for (letters in theWord){
+        elementWordToFind.textContent += "*";
+    }
+
 }
 
 // function readKey()
@@ -33,9 +43,13 @@ function searchCorrespondanceBeweenKeyAndWord(key) {
     for (letters in theWord){
         if (theWord[letters] === key){
             console.log("déjà t'as trouvé une lettre mon grand");
+            let newText = theWord.split(" ").pop(key);
+            elementWordToFind.textContent = newText;
         }
     }
 }
+
+
 // function win()
 // function lose()
 // Afficher les lettres trouvées du mot dans le jeu après chaque tentative.
