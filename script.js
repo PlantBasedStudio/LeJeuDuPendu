@@ -1,7 +1,7 @@
 // Création du jeu du pendu.
 
 
-// ---- VARIABLES ----
+//! ---- VARIABLES ----
 const WordsToFind = ["epistemology", "direction", "object", "push", "pull", "prototype", "fetch", "database", "display", "element", "console", "content", "style", "event", "index", "script", "practice", "modal", "learn", "teach", "code", "langage", "internet"];;
 let theWord = "";
 let hideWord;
@@ -18,7 +18,7 @@ let gameStarted = false;
 function startGame() {
     startGameButton.style.display = "none";
     theWord = WordsToFind[Math.floor(Math.random() * WordsToFind.length)];
-    
+
     console.log(theWord);
     gameStarted = true;
     fractionTheWord();
@@ -70,12 +70,19 @@ function actualisedWord(key) {
 }
 
 
-// function win()
-// function lose()
-// Afficher les lettres trouvées du mot dans le jeu après chaque tentative.
 // Afficher "gagnant" ou "perdant" suivant le résultat ainsi qu'une musique appropriée.
-// Option recommencer (fenêtre modale)
+function win()
+{
+    startGameButton.style.display = "block";
+    console.log("bravo vous avez gagné");
+}
 
+function lose(){
+    console.log(`Dommage, vous avez perdu, la bonne réponse était  ${WordsToFind}`);
+}
+
+// Option recommencer (Même fenêtre modale que les wins or loose. Mettre tout en forme en css)
+// Pour l'image on peut lui affecter sa propriété en fonction de attempts en pensait à modifier attempts pour qu'il soit en positif et demarre a partir de . Animer l'image avec une transition css ou en faisant du pixel art personnalisé.
 
 //!---- Events ----
 startGameButton.addEventListener("click", startGame);
