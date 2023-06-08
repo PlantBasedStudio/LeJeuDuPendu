@@ -23,9 +23,12 @@ sprite.style.width = '108px';
 function startGame() {
     startGameButton.style.display = "none";
     theWord = WordsToFind[Math.floor(Math.random() * WordsToFind.length)];
-
+    sprite.style.background = `url(./spritesheet.png) -0px 0px`;
+    widthOfSpriteSheet = 108;
     console.log(theWord);
     gameStarted = true;
+    attempsNumber = 7;
+    attempsElementDisplay.textContent = `${attempsNumber} trials left`;
     fractionTheWord();
 }
 
@@ -71,6 +74,9 @@ function searchCorrespondanceBeweenKeyAndWord(key) {
         attempsNumber -= 1;
         attempsElementDisplay.textContent = `${attempsNumber} trials left`;
         animateScript();
+        if (attempsNumber === 0){
+            lose();
+        }
     }
     
 }
@@ -83,6 +89,9 @@ function actualisedWord(key) {
         }
     }
     elementWordToFind.textContent = hideWord.join("");
+    if (theWord === elementWordToFind.textContent){
+        win();
+    }
 }
 
 
@@ -90,15 +99,20 @@ function actualisedWord(key) {
 // Afficher "gagnant" ou "perdant" suivant le résultat ainsi qu'une musique appropriée.
 function win()
 {
+    gameStarted = false;
     startGameButton.style.display = "block";
+    startGameButton.style.textAlign = "center";
+    startGameButton.style.margin = "0 auto";
+    startGameButton.textContent = "Replay";
+    startGameButton.style.marginTop = "10px";
     console.log("bravo vous avez gagné");
+
 }
 
 function lose(){
-    console.log(`Dommage, vous avez perdu, la bonne réponse était  ${WordsToFind}`);
+    console.log(`Dommage, vous avez perdu, la bonne réponse était  ${theWord}`);
 }
 
-// Option recommencer (Même fenêtre modale que les wins or loose. Mettre tout en forme en css)
 // Pour l'image on peut lui affecter sa propriété en fonction de attempts en pensait à modifier attempts pour qu'il soit en positif et demarre a partir de . Animer l'image avec une transition css ou en faisant du pixel art personnalisé.
 
 //!---- Events ----
@@ -122,4 +136,3 @@ document.addEventListener("keydown", (event) =>{
 
 
 // Option, afficher les lettres restantes en disabled les touches déjà préssées.
-// Afficher l'avancement du pendu entre chaque tentative.
