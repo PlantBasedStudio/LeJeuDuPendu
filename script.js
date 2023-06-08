@@ -114,13 +114,13 @@ function actualisedWord(key) {
 // Afficher "gagnant" ou "perdant" suivant le résultat ainsi qu'une musique appropriée.
 function win()
 {
-    console.log("bravo vous avez gagné");
+    attempsElementDisplay.textContent = "BRAVO" ;
     winSound.play();
 
 }
 
 function lose(){
-    console.log(`Dommage, vous avez perdu, la bonne réponse était  ${theWord}`);
+    attempsElementDisplay.textContent = `Too bad, you lost, the word was :  ${theWord}`;
     loseSound.play();
 }
 
