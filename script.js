@@ -1,5 +1,11 @@
 // Création du jeu du pendu.
-
+//! ---- SOUND -----
+let soundtrack = new Audio('./Sounds/soundtrack.wav');
+let correctSound = new Audio('./Sounds/correctSound.wav');
+let incorrectSound = new Audio('./Sounds/incorrectSound.wav');
+let winSound = new Audio('./Sounds/Victory.wav');
+let loseSound = new Audio('./Sounds/Defeat.wav');
+let screamSound = new Audio('./Sounds/scream.wav');
 
 //! ---- VARIABLES ----
 const WordsToFind = ["epistemology", "direction", "object", "push", "pull", "prototype", "fetch", "database", "display", "element", "console", "content", "style", "event", "index", "script", "practice", "modal", "learn", "teach", "code", "langage", "internet"];
@@ -27,6 +33,7 @@ function startGame() {
     attempsNumber = 7;
     attempsElementDisplay.textContent = `${attempsNumber} trials left`;
     fractionTheWord();
+    soundtrack.play();
 }
 
 function resetImage(){
@@ -70,13 +77,15 @@ function searchCorrespondanceBeweenKeyAndWord(key) {
         if (theWord[letters] === key){
             actualisedWord(key);
             count += 1;
-            
+            correctSound.play();
         }
     }
     // Le count sert a connaître s'il y a eu une correspondance ou non pour retirer un essai (uniquement en cas de nouvelle lettre car on laisse le joueur donner une lettre qu'il a déjà utiliser au clavier)
     if (count === 0){
         attempsNumber -= 1;
         attempsElementDisplay.textContent = `${attempsNumber} trials left`;
+        screamSound.play();
+        incorrectSound.play();
         animateScript();
         if (attempsNumber === 0){
             endGame();
@@ -106,16 +115,18 @@ function actualisedWord(key) {
 function win()
 {
     console.log("bravo vous avez gagné");
+    winSound.play();
 
 }
 
 function lose(){
     console.log(`Dommage, vous avez perdu, la bonne réponse était  ${theWord}`);
-    
+    loseSound.play();
 }
 
 
 function endGame(){
+    soundtrack.pause();
     startGameButton.style.display = "block";
     startGameButton.style.textAlign = "center";
     startGameButton.style.margin = "0 auto";
