@@ -11,6 +11,11 @@ const attempsElementDisplay = document.getElementById("attempts");
 const keys = document.querySelectorAll(".key"); // permet de récupérer toutes les touches du jeu.
 const startGameButton = document.getElementById("startGameButton");
 let gameStarted = false;
+const sprite = document.querySelector("#spritesheet");
+let widthOfSpriteSheet = 108;
+sprite.style.background = `url(./spritesheet.png) -0px 0px`;
+sprite.style.height = '97px';
+sprite.style.width = '108px';
 
 
 
@@ -43,18 +48,29 @@ function readKey(key) {
     }
 }
 
+
+function animateScript(){
+    
+    sprite.style.backgroundPosition = `-${widthOfSpriteSheet}px 0px`;
+    widthOfSpriteSheet += 108;
+    console.log(sprite.style.backgroundPosition);
+    
+}
+
 function searchCorrespondanceBeweenKeyAndWord(key) {
     let count = 0;
     for (letters in theWord){
         if (theWord[letters] === key){
             actualisedWord(key);
             count += 1;
+            
         }
     }
     // Le count sert a connaître s'il y a eu une correspondance ou non pour retirer un essai (uniquement en cas de nouvelle lettre car on laisse le joueur donner une lettre qu'il a déjà utiliser au clavier)
     if (count === 0){
         attempsNumber -= 1;
         attempsElementDisplay.textContent = `${attempsNumber} trials left`;
+        animateScript();
     }
     
 }
@@ -68,6 +84,7 @@ function actualisedWord(key) {
     }
     elementWordToFind.textContent = hideWord.join("");
 }
+
 
 
 // Afficher "gagnant" ou "perdant" suivant le résultat ainsi qu'une musique appropriée.

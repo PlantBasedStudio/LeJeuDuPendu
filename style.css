@@ -45,3 +45,16 @@ footer{
     width: 8dvw;
     
 }
+
+#spritesheet{
+    margin: 0 auto;
+    text-align: center;
+    justify-content: center;
+    display: flex;
+}
+
+#image{
+    height: 97px;
+    width: 108px;
+    
+}
