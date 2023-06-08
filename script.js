@@ -2,7 +2,7 @@
 
 
 //! ---- VARIABLES ----
-const WordsToFind = ["epistemology", "direction", "object", "push", "pull", "prototype", "fetch", "database", "display", "element", "console", "content", "style", "event", "index", "script", "practice", "modal", "learn", "teach", "code", "langage", "internet"];;
+const WordsToFind = ["epistemology", "direction", "object", "push", "pull", "prototype", "fetch", "database", "display", "element", "console", "content", "style", "event", "index", "script", "practice", "modal", "learn", "teach", "code", "langage", "internet"];
 let theWord = "";
 let hideWord;
 const elementWordToFind = document.getElementById("wordToFind");
@@ -13,9 +13,7 @@ const startGameButton = document.getElementById("startGameButton");
 let gameStarted = false;
 const sprite = document.querySelector("#spritesheet");
 let widthOfSpriteSheet = 108;
-sprite.style.background = `url(./spritesheet.png) -0px 0px`;
-sprite.style.height = '97px';
-sprite.style.width = '108px';
+
 
 
 
@@ -23,13 +21,19 @@ sprite.style.width = '108px';
 function startGame() {
     startGameButton.style.display = "none";
     theWord = WordsToFind[Math.floor(Math.random() * WordsToFind.length)];
-    sprite.style.background = `url(./spritesheet.png) -0px 0px`;
-    widthOfSpriteSheet = 108;
+    resetImage();
     console.log(theWord);
     gameStarted = true;
     attempsNumber = 7;
     attempsElementDisplay.textContent = `${attempsNumber} trials left`;
     fractionTheWord();
+}
+
+function resetImage(){
+    sprite.style.background = `url(./spritesheet.png) -0px 0px`;
+    sprite.style.height = '97px';
+    sprite.style.width = '108px';
+    widthOfSpriteSheet = 108;
 }
 
 function fractionTheWord(){
@@ -47,7 +51,7 @@ function readKey(key) {
     }
     else if (attempsNumber <= 0)
     {
-        console.log("Tu ne peux plus jouer");
+        console.log("Tu ne peux plus jouer"); //! faire une animation de shake d'écran et un son négatif + afficher (tu ne peux plus jouer)
     }
 }
 
@@ -75,6 +79,7 @@ function searchCorrespondanceBeweenKeyAndWord(key) {
         attempsElementDisplay.textContent = `${attempsNumber} trials left`;
         animateScript();
         if (attempsNumber === 0){
+            endGame();
             lose();
         }
     }
@@ -90,6 +95,7 @@ function actualisedWord(key) {
     }
     elementWordToFind.textContent = hideWord.join("");
     if (theWord === elementWordToFind.textContent){
+        endGame();
         win();
     }
 }
@@ -99,20 +105,24 @@ function actualisedWord(key) {
 // Afficher "gagnant" ou "perdant" suivant le résultat ainsi qu'une musique appropriée.
 function win()
 {
-    gameStarted = false;
-    startGameButton.style.display = "block";
-    startGameButton.style.textAlign = "center";
-    startGameButton.style.margin = "0 auto";
-    startGameButton.textContent = "Replay";
-    startGameButton.style.marginTop = "10px";
     console.log("bravo vous avez gagné");
 
 }
 
 function lose(){
     console.log(`Dommage, vous avez perdu, la bonne réponse était  ${theWord}`);
+    
 }
 
+
+function endGame(){
+    startGameButton.style.display = "block";
+    startGameButton.style.textAlign = "center";
+    startGameButton.style.margin = "0 auto";
+    startGameButton.textContent = "Replay";
+    startGameButton.style.marginTop = "10px";
+    gameStarted = false;
+}
 // Pour l'image on peut lui affecter sa propriété en fonction de attempts en pensait à modifier attempts pour qu'il soit en positif et demarre a partir de . Animer l'image avec une transition css ou en faisant du pixel art personnalisé.
 
 //!---- Events ----
