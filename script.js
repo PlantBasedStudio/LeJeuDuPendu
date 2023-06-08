@@ -59,6 +59,8 @@ function readKey(key) {
     else if (attempsNumber <= 0)
     {
         console.log("Tu ne peux plus jouer"); //! faire une animation de shake d'écran et un son négatif + afficher (tu ne peux plus jouer)
+        incorrectSound.play();
+        attempsElementDisplay.textContent = "You can't type any key, please click on replay to continue";
     }
 }
 
